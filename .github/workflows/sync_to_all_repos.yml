@@ -11,21 +11,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get List of Repositories
-        run: |
-          repos=$(cat ./repositories.txt 2>/dev/null)
-          if [ -z "$repos" ]; then
-            echo "No repositories found in ./repositories.txt... exiting"
-            exit 1
-          fi
-          echo "Setting up for repos: $repos"
-          echo ::set-env name=REPOS::$repos
-
       - name: Run sync
         uses: adrianjost/files-sync-action@v1.0.1
         with:
-          FILE_PATTERNS: |
+          FILE_PATTERNS: |-
             ^.github/workflows/main.yml
             ^.github/build/get_docker_version.sh
-          TARGET_REPOS: ${{ env.REPOS }}
+          TARGET_REPOS: |-
+            furiousgeorgecontainers/docker-elodie
+            furiousgeorgecontainers/docker-fever
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}

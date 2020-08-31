@@ -1,2 +1,0 @@
-furiousgeorgecontainers/docker-elodie
-furiousgeorgecontainers/docker-fever

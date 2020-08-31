@@ -5,6 +5,12 @@ on:
     branches: [ master ]
     paths-ignore:
       - .github/workflows/sync_to_all_repos.yml
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: organization/repository to push
+        default: NONE
+        required: true
 
 jobs:
   sync-workflows:
@@ -13,7 +19,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run sync
+      - name: Run sync for all repos
+        if: github.event.inputs.repository == 'NONE'
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |-
@@ -23,4 +30,14 @@ jobs:
             furiousgeorgecontainers/docker-elodie
             furiousgeorgecontainers/docker-fever
             furiousgeorgecontainers/docker-matterwiki
+          GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
+
+      - name: Manual sync for one repo
+        if: github.event.inputs.repository != 'NONE'
+        uses: adrianjost/files-sync-action@v1.0.1
+        with:
+          FILE_PATTERNS: |-
+            ^.github/workflows/main.yml
+            ^.github/build/get_docker_version.sh
+          TARGET_REPOS: github.event.inputs.repository
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}

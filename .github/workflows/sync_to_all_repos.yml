@@ -39,5 +39,5 @@ jobs:
           FILE_PATTERNS: |-
             ^.github/workflows/main.yml
             ^.github/build/get_docker_version.sh
-          TARGET_REPOS: github.event.inputs.repository
+          TARGET_REPOS: ${{ github.event.inputs.repository }}
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}

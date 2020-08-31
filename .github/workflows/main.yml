@@ -37,11 +37,11 @@ jobs:
           fi
 
       - name: Checkout code
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         uses: actions/checkout@v2
 
       - name: Get target docker repository
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         run: |
 
           # derive docker registry repository from github repository.
@@ -60,7 +60,7 @@ jobs:
           echo ::set-env name=DOCKER_REPO::$full_repo
 
       - name: Get Next Version
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         id: vars
         run: |
           ref=$(echo $GITHUB_REF | awk -F'/' '{print $NF}')
@@ -109,7 +109,7 @@ jobs:
           echo ::set-output name=timestamp::$(date '+%Y-%m-%dT%H:%M:%S%:z')
           
       - name: Check if this run will push to the registry
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         run: |
 
           ref=$(echo $GITHUB_REF | awk -F'/' '{print $NF}')
@@ -123,7 +123,7 @@ jobs:
           fi
 
       - name: Select tags to push
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         run: |
           if [ "$GITHUB_EVENT_NAME" == "schedule" ]; then
             # only build and push the unstable tag if it is a schedule
@@ -137,7 +137,7 @@ jobs:
           fi
 
       - name: Display build information
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         run: |
           echo "BUILD_DATE: ${{steps.vars.outputs.timestamp}}"
           echo "VERSION: ${{steps.vars.outputs.version}}"
@@ -146,7 +146,7 @@ jobs:
           echo "DOCKER_REPO: $DOCKER_REPO"
 
       - name: Build and push Docker images
-        if: ${{ env.SHOULD_RUN }} == 'true'
+        if: env.SHOULD_RUN == 'true'
         uses: docker/build-push-action@v1
         with:
           add_git_labels: true

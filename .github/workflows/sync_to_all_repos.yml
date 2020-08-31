@@ -29,6 +29,7 @@ jobs:
           TARGET_REPOS: |-
             furiousgeorgecontainers/docker-beets-alternative-mod
             furiousgeorgecontainers/docker-collectd
+            furiousgeorgecontainers/docker-cpuload
             furiousgeorgecontainers/docker-elodie
             furiousgeorgecontainers/docker-fever
             furiousgeorgecontainers/docker-matterwiki

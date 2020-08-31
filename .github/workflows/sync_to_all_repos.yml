@@ -3,11 +3,6 @@ name: Sync to all repos
 on:
   push:
     branches: [ master ]
-      inputs:
-        repository:
-          description: organization/repository to push
-          default: ALL
-          required: false
     paths-ignore:
       - .github/workflows/sync_to_all_repos.yml
   workflow_dispatch:
@@ -24,8 +19,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Determine single or multi-run
+        run: |
+          if [ -z "${{ github.event.inputs.repository }}" ]; then
+            echo "Defaulting to multi-repo sync"
+            echo ::set-env name=RUN_TYPE::multi
+          else
+            echo "Single-repo run: ${{ github.event.inputs.repository }}"
+            echo ::set-env name=RUN_TYPE::single
+          fi
+
       - name: Run sync for all repos
-        if: github.event.inputs.repository == 'ALL'
+        if: env.RUN_TYPE == 'multi'
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |-
@@ -45,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
 
       - name: Manual sync for one repo
-        if: github.event.inputs.repository != 'ALL'
+        if: github.event.inputs.repository == 'single'
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |-

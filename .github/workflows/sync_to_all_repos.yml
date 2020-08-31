@@ -6,7 +6,7 @@ on:
 
 jobs:
   sync-workflows:
-    name: Sync Workflows
+    runs-on: ubuntu-latest
     steps:
       - name: Get List of Repositories
         run: |

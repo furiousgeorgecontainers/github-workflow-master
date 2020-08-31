@@ -4,6 +4,9 @@ name: CI
 env:
   DOCKER_PREFIX: docker-
   SCHEDULE_TAG: unstable
+
+  # Comma separated list of repos to exclude
+  EXCLUDE_REPOS: furiousgeorgecontainers/github-workflow-master
   TAGS: latest
   PUSH: true
 
@@ -23,6 +26,14 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+      - name: Check exclude repos
+        run: |
+          excluded=$(echo "$EXCLUDE_REPOS" | tr , '\n')
+          if (echo "$excluded"  | fgrep -q "$GITHUB_REPOSITORY"); then
+            echo "This repository is excluded from running this workflow- exiting"
+            exit 1
+          fi
+
       - name: Checkout code
         uses: actions/checkout@v2
 

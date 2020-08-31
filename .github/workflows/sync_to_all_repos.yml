@@ -3,6 +3,8 @@ name: Sync to all repos
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - .github/workflows/sync_to_all_repos.yml
 
 jobs:
   sync-workflows:
@@ -20,4 +22,5 @@ jobs:
           TARGET_REPOS: |-
             furiousgeorgecontainers/docker-elodie
             furiousgeorgecontainers/docker-fever
+            furiousgeorgecontainers/docker-matterwiki
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}

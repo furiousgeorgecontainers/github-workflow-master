@@ -32,7 +32,10 @@ jobs:
             furiousgeorgecontainers/docker-cpuload
             furiousgeorgecontainers/docker-elodie
             furiousgeorgecontainers/docker-fever
+            furiousgeorgecontainers/docker-leanote
+            furiousgeorgecontainers/docker-leanote-populatedb
             furiousgeorgecontainers/docker-matterwiki
+            furiousgeorgecontainers/docker-pfsense-backup
             # I really don't like hard coding these but I could not find a way to read them from an external file
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
 

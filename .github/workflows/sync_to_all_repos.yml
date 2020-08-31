@@ -10,7 +10,7 @@ on:
       repository:
         description: organization/repository to push
         default: ALL
-        required: true
+        required: false
 
 jobs:
   sync-workflows:

@@ -46,8 +46,11 @@ jobs:
             furiousgeorgecontainers/docker-leanote-populatedb
             furiousgeorgecontainers/docker-matterwiki
             furiousgeorgecontainers/docker-pfsense-backup
-            # I really don't like hard coding these but I could not find a way to read them from an external file
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
+
+      # Hardcoding the above target repos is less than ideal. Couldn't find a way to read
+      # them from an external file...  Will try later.
+
 
       - name: Manual sync for one repo
         if: github.event.inputs.repository == 'single'

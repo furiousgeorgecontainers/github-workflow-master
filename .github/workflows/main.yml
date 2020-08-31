@@ -31,7 +31,7 @@ jobs:
           excluded=$(echo "$EXCLUDE_REPOS" | tr , '\n')
           if (echo "$excluded"  | fgrep -q "$GITHUB_REPOSITORY"); then
             echo "This repository is excluded from running this workflow- exiting"
-            exit 1
+            exit 0
           fi
 
       - name: Checkout code

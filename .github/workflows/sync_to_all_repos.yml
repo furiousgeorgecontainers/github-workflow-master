@@ -8,6 +8,9 @@ jobs:
   sync-workflows:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Get List of Repositories
         run: |
           repos=$(cat ./repositories.txt 2>/dev/null)
@@ -17,6 +20,7 @@ jobs:
           fi
           echo "Setting up for repos: $repos"
           echo ::set-env name=REPOS::$repos
+
       - name: Run sync
         uses: adrianjost/files-sync-action@v1.0.1
         with:

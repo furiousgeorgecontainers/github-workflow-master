@@ -3,6 +3,11 @@ name: Sync to all repos
 on:
   push:
     branches: [ master ]
+      inputs:
+        repository:
+          description: organization/repository to push
+          default: ALL
+          required: false
     paths-ignore:
       - .github/workflows/sync_to_all_repos.yml
   workflow_dispatch:

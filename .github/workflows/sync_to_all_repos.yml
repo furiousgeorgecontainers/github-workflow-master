@@ -27,10 +27,12 @@ jobs:
             ^.github/workflows/main.yml
             ^.github/build/get_docker_version.sh
           TARGET_REPOS: |-
+            furiousgeorgecontainers/docker-beets-alternative-mod
+            furiousgeorgecontainers/docker-collectd
             furiousgeorgecontainers/docker-elodie
             furiousgeorgecontainers/docker-fever
             furiousgeorgecontainers/docker-matterwiki
-            furiousgeorgecontainers/docker-beets-alternative-mod
+            # I really don't like hard coding these but I could not find a way to read them from an external file
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
 
       - name: Manual sync for one repo

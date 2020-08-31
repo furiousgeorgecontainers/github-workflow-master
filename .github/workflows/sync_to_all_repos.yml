@@ -9,7 +9,7 @@ on:
     inputs:
       repository:
         description: organization/repository to push
-        default: NONE
+        default: ALL
         required: true
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run sync for all repos
-        if: github.event.inputs.repository == 'NONE'
+        if: github.event.inputs.repository == 'ALL'
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |-
@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
 
       - name: Manual sync for one repo
-        if: github.event.inputs.repository != 'NONE'
+        if: github.event.inputs.repository != 'ALL'
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |-

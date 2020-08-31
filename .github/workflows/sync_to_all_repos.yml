@@ -30,6 +30,7 @@ jobs:
             furiousgeorgecontainers/docker-elodie
             furiousgeorgecontainers/docker-fever
             furiousgeorgecontainers/docker-matterwiki
+            furiousgeorgecontainers/docker-beets-alternative-mod
           GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN }}
 
       - name: Manual sync for one repo

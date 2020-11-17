@@ -54,7 +54,7 @@ jobs:
 
 
       - name: Manual sync for one repo
-        if: github.event.inputs.repository == 'single'
+        if: env.RUN_TYPE == 'single'
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |-

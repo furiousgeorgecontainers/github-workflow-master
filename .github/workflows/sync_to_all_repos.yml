@@ -38,6 +38,7 @@ jobs:
             ^.github/build/get_docker_version.sh
           TARGET_REPOS: |-
             furiousgeorgecontainers/docker-beets-alternative-mod
+            furiousgeorgecontainers/docker-calibre-server
             furiousgeorgecontainers/docker-collectd
             furiousgeorgecontainers/docker-cpuload
             furiousgeorgecontainers/docker-elodie

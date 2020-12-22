@@ -21,7 +21,7 @@ jobs:
 
       - name: Determine single or multi-run
         run: |
-          if [ -z "${{ github.event.inputs.repository }}" ]; then
+          if [ -z "${{ github.event.inputs.repository }}" ] || [ "${{ github.event.inputs.repository }}" == "ALL" ]; then
             echo "Defaulting to multi-repo sync"
             echo "RUN_TYPE=multi" >> $GITHUB_ENV
           else
